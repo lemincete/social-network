@@ -5,8 +5,9 @@ import { BrowserRouter } from 'react-router-dom';
 import AppRouter from './router/AppRouter';
 
 import { store } from './store';
-
 import { Provider } from 'react-redux';
+
+import './styles/index.scss';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
