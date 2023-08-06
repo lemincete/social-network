@@ -41,6 +41,10 @@ const publicRoutesArr: RouterItem[] = [
     {
         path: '/registration',
         Component: RegistrationPage
+    },
+    {
+        path: '*',
+        Component: ErrorPage
     }
 ];
 

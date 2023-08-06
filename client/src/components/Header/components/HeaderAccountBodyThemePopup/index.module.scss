@@ -1,0 +1,24 @@
+.root {
+    display: flex;
+    justify-content: space-between;
+    column-gap: 5px;
+    align-items: center;
+    &__theme {
+        color: rgb(119, 119, 156);
+        &:hover {
+            text-decoration: underline;
+        }
+        &.active {
+            border: 1px solid #000;
+            padding: 5px 0;
+        }
+    }
+    &__menu {
+        background: #fff;
+        color: rgb(62, 62, 226);
+        cursor: pointer;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}

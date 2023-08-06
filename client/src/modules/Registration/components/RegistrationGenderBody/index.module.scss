@@ -1,0 +1,28 @@
+.root {
+    &__form__gender {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        column-gap: 10px;
+        label {
+            margin-right: 5px;
+        }
+    }
+    &__form__gender__item {
+        input {
+            cursor: pointer;
+        }
+    }
+    &__form__input {
+        width: 100%;
+        border: 2px solid rgb(230, 230, 230);
+        border-radius: 5px;
+        padding: 10px;
+        &:focus {
+            border: 2px solid #459ef7;
+        }
+    }
+    &__form__other__gender {
+        margin-top: 10px;
+    }
+}

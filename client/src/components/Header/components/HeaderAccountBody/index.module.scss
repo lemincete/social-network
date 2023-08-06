@@ -20,4 +20,12 @@
     &.active {
         background: rgb(230, 230, 230);
     }
+    &__account_body_arrow img {
+        padding-top: 2px;
+    }
+    &__account_body_avatar img {
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+    }
 }

@@ -1,0 +1,51 @@
+.root {
+    &__account__popup {
+        position: absolute;
+        padding: 10px;
+        border-radius: 0 0 5px 5px;
+        top: 50px;
+        z-index: 2;
+        right: 0;
+        box-shadow: 0 20px 40px 0 rgba(0, 0, 0, 0.3);
+    }
+    &__account__popup_account_info {
+        background: rgb(230, 230, 230);
+        border-radius: 5px;
+        padding: 15px 10px;
+        display: flex;
+        column-gap: 10px;
+        margin-bottom: 10px;
+    }
+    &__account__avatar img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+    }
+    &__account__popup__menu__item {
+        color: #000;
+        display: flex;
+        column-gap: 10px;
+        margin-bottom: 5px;
+        align-items: center;
+        cursor: pointer;
+        padding: 5px 0px;
+    }
+    &__account__popup__menu__image img {
+        width: 20px;
+        height: 20px;
+    }
+    &__account__popup_account_info_body_link {
+        display: flex;
+        color: #838080;
+        text-decoration: underline;
+    }
+    &__account__popup_body_link_body_arrow img {
+        transform: rotate(-90deg);
+        width: 15px;
+        height: 15px;
+    }
+    &__account__popup_account_info_body_nickname {
+        margin-bottom: 5px;
+        font-size: 15px;
+    }
+}
