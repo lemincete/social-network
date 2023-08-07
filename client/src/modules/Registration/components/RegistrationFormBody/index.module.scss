@@ -1,0 +1,7 @@
+.root {
+    min-width: 300px;
+    margin-bottom: 10px;
+    & > div {
+        margin-bottom: 15px;
+    }
+}

@@ -31,7 +31,7 @@ const RegistrationGenderBody: FC<RegistrationGenderBodyProps> = ({ gender, setGe
             {gender === 'Other' &&
                 <div className={styles.root__form__other__gender}>
                     <input placeholder='Gender' required {...register('otherGender', { pattern: /^[^\s\d]*$/ })} className={styles.root__form__input} type="text" />
-                    {errors.otherGender?.type === 'pattern' && <RegistrationValidationErrorMessage>Incorrect gender</RegistrationValidationErrorMessage>}
+                    {errors.otherGender?.type === 'pattern' && <RegistrationValidationErrorMessage>Gender can't be has numbers/spaces</RegistrationValidationErrorMessage>}
                 </div>
             }
         </div>

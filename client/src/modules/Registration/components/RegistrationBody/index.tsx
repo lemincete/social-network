@@ -5,33 +5,16 @@ import { useFetching } from '../../../../hooks/useFetching';
 
 import { fetchRegistration } from '../../api/fetchRegistration';
 
-import { IFieldsListItem, IProfile, IRegistrationForm, IFieldsName } from '../../types';
+import { IProfile, IRegistrationForm } from '../../types';
 
 import styles from './index.module.scss';
 
 import Logo from './images/logo.svg';
 
 import RegistrationButton from '../RegistrationButton';
-import RegistrationFormItem from '../RegistrationFormItem';
-import RegistrationGenderBody from '../RegistrationGenderBody';
 
+import RegistrationFormBody from '../RegistrationFormBody';
 
-const fieldsList: IFieldsListItem[] = [
-    {
-        name: 'name',
-        options: { pattern: /^[^\d\s]*$/ },
-    },
-    {
-        name: 'surname',
-        options: { pattern: /^[^\s\d]*$/ }
-    },
-    {
-        name: 'email',
-        options: { pattern: /^\w+@[a-z]+\.[a-z]+$/ }
-    }
-]
-
-const fieldsPasswordsList: IFieldsName[] = ['password', 'confirmPassword'];
 
 
 const RegistrationBody = () => {
@@ -44,7 +27,6 @@ const RegistrationBody = () => {
     const [registerUser, isRegistrationLoading] = useFetching(async () => {
         fetchRegistration(profile);
     })
-
 
     const [gender, setGender] = useState<string>('');
 
@@ -73,15 +55,7 @@ const RegistrationBody = () => {
                 <div className={styles.root__form__logo}>
                     <img src={Logo} alt="logo" />
                 </div>
-                <div className={styles.root__form__body}>
-                    {fieldsList.map(field =>
-                        <RegistrationFormItem isPassword={false} name={field.name} key={field.name} isPasswordsMatched={isPasswordsMatched} />
-                    )}
-                    {fieldsPasswordsList.map(field =>
-                        <RegistrationFormItem isPassword={true} name={field} key={field} isPasswordsMatched={isPasswordsMatched} />
-                    )}
-                    <RegistrationGenderBody gender={gender} setGender={setGender} />
-                </div>
+                <RegistrationFormBody gender={gender} setGender={setGender} isPasswordsMatched={isPasswordsMatched} />
                 <RegistrationButton loading={isRegistrationLoading} />
             </form>
         </div>

@@ -16,7 +16,7 @@ interface RegistrationInputProps {
 }
 
 
-const RegistrationInput: FC<RegistrationInputProps> = ({ nameField }) => {
+const RegistrationPasswordInput: FC<RegistrationInputProps> = ({ nameField }) => {
 
     const [isShow, setIsShow] = useState<boolean>(false);
 
@@ -29,7 +29,7 @@ const RegistrationInput: FC<RegistrationInputProps> = ({ nameField }) => {
 
     return (
         <div className={styles.root}>
-            <input {...register(nameField)} required type={isShow ? 'text' : 'password'} className={styles.root__input} />
+            <input {...register(nameField, { minLength: 8, maxLength: 16 })} required type={isShow ? 'text' : 'password'} className={styles.root__input} />
             <div onClick={changeShowingPassword} className={styles.root__eye__body}>
                 <img src={isShow ? OpenEye : CloseEye} alt="eye" />
             </div>
@@ -37,4 +37,4 @@ const RegistrationInput: FC<RegistrationInputProps> = ({ nameField }) => {
     );
 };
 
-export default RegistrationInput;
+export default RegistrationPasswordInput;

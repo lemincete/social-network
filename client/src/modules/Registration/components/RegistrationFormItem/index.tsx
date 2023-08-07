@@ -5,22 +5,25 @@ import { useFormContext } from 'react-hook-form';
 import { getCapitalizeString } from '../../helpers';
 
 import { IRegistrationForm, IFieldsName } from '../../types';
+import { RegisterOptions } from "react-hook-form"
 
 import styles from './index.module.scss';
 
-import RegistrationInput from '../RegistrationInput';
-
+import RegistrationPasswordInput from '../RegistrationPasswordInput';
+import RegistrationValidationPasswordsBody from '../RegistrationValidationPasswordsBody';
 import RegistrationValidationErrorMessage from '../RegistrationValidationErrorMessage';
+import RegistrationValidationBody from '../RegistrationValidationBody';
 
 
 interface RegistrationFormItemProps {
     name: IFieldsName,
     isPassword: boolean,
-    isPasswordsMatched: boolean
+    isPasswordsMatched: boolean,
+    options?: RegisterOptions<IRegistrationForm>
 }
 
 
-const RegistrationFormItem: FC<RegistrationFormItemProps> = ({ name, isPassword, isPasswordsMatched }) => {
+const RegistrationFormItem: FC<RegistrationFormItemProps> = ({ name, isPassword, isPasswordsMatched, options }) => {
 
     const { register, formState: { errors } } = useFormContext<IRegistrationForm>();
 
@@ -28,16 +31,15 @@ const RegistrationFormItem: FC<RegistrationFormItemProps> = ({ name, isPassword,
         <div className={styles.root}>
             <h3 className={styles.root__input__title}>{getCapitalizeString(name)}</h3>
             {isPassword
-                ? <RegistrationInput nameField={name} />
-                : <input required {...register(name, { pattern: /^[^\d\s]*$/ })} className={styles.root__form__input} type="text" />
+                ? <RegistrationPasswordInput nameField={name} />
+                : <input required {...register(name, options)} className={styles.root__form__input} type="text" />
             }
             {isPassword
                 ? <>
                     {!isPasswordsMatched && <RegistrationValidationErrorMessage>Passwords don't match</RegistrationValidationErrorMessage>}
+                    <RegistrationValidationPasswordsBody type={errors[name]?.type} />
                 </>
-                : <>
-                    {errors[name]?.type === 'pattern' && <RegistrationValidationErrorMessage>Incorrect {name}</RegistrationValidationErrorMessage>}
-                </>
+                : <RegistrationValidationBody type={errors[name]?.type} name={name} />
             }
         </div>
     );
