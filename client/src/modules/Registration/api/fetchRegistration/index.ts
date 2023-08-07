@@ -1,5 +1,6 @@
-import axios from "axios";
+
+import { IProfile } from "../../types";
 
 export const fetchRegistration = async (profile: IProfile) => {
-    console.log(profile);
+
 }

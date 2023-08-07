@@ -13,7 +13,7 @@ interface RegistrationValidationBodyProps {
 const RegistrationValidationBody: FC<RegistrationValidationBodyProps> = ({ type, name }) => {
     switch (type) {
         case 'pattern':
-            return <RegistrationValidationErrorMessage>{getCapitalizeString(name)} can't be has numbers/spaces </RegistrationValidationErrorMessage>
+            return <RegistrationValidationErrorMessage>{getCapitalizeString(name)} can't be has numbers/symbols </RegistrationValidationErrorMessage>
         case 'minLength':
             return <RegistrationValidationErrorMessage>The {name} is too short</RegistrationValidationErrorMessage>
         case 'maxLength':

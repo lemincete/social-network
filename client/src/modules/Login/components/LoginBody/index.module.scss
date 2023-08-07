@@ -3,8 +3,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 20px 0;
-
     &__form {
         padding: 30px 20px;
         border: 2px solid rgb(230, 230, 230);
@@ -16,10 +14,7 @@
     &__form__logo {
         margin-bottom: 20px;
     }
-    &__input__title {
-        margin-bottom: 10px;
-    }
-    &__login__link {
+    &__registration__link {
         display: block;
         margin-top: 15px;
         text-decoration: underline;

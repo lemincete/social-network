@@ -11,10 +11,9 @@ import styles from './index.module.scss';
 
 import Logo from './images/logo.svg';
 
+import { Link } from 'react-router-dom';
 import RegistrationButton from '../RegistrationButton';
-
 import RegistrationFormBody from '../RegistrationFormBody';
-
 
 
 const RegistrationBody = () => {
@@ -22,7 +21,6 @@ const RegistrationBody = () => {
     const isMounted = useRef<boolean>(false);
 
     const [profile, setProfile] = useState<IProfile>({ name: '', password: '', gender: '', surname: '', email: '' });
-
 
     const [registerUser, isRegistrationLoading] = useFetching(async () => {
         fetchRegistration(profile);
@@ -57,6 +55,7 @@ const RegistrationBody = () => {
                 </div>
                 <RegistrationFormBody gender={gender} setGender={setGender} isPasswordsMatched={isPasswordsMatched} />
                 <RegistrationButton loading={isRegistrationLoading} />
+                <Link className={styles.root__login__link} to="/login">Login</Link>
             </form>
         </div>
     );
