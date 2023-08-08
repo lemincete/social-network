@@ -2,7 +2,7 @@ import { FC } from 'react';
 
 import { useFormContext } from 'react-hook-form';
 
-import { getCapitalizeString } from '../../helpers';
+import { getCapitalizeString } from '../../helpers/getCapitalizeString';
 
 import { IRegistrationForm, IFieldsName } from '../../types';
 import { RegisterOptions } from "react-hook-form"

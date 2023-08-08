@@ -15,37 +15,41 @@ import Logo from './images/logo.svg';
 import LoginButton from '../LoginButton';
 import LoginFormBody from '../LoginFormBody';
 import { Link } from 'react-router-dom';
+import LoginAlertMessage from '../LoginAlertMessage';
 
 
 const LoginBody = () => {
 
     const isMounted = useRef<boolean>(false);
 
+    const [responseMessage, setResponseMessage] = useState<string>('');
+
     const [profile, setProfile] = useState<ILoginForm>({ email: '', password: '' });
 
     const [loginUser, isLoginLoading] = useFetching(async () => {
-        fetchLogin(profile);
+        const { isError, message } = await fetchLogin(profile);
+        isError ? setResponseMessage(message) : successfulLogin(message)
     });
+
+    const successfulLogin = (jwt: string) => {
+        localStorage.setItem('jwt', jwt);
+        window.location.replace('/');
+    }
 
     const { handleSubmit } = useFormContext<ILoginForm>();
 
     const onSubmit: SubmitHandler<ILoginForm> = (data) => {
-
-        console.log(data);
-
         setProfile(data);
     }
 
     useEffect(() => {
-
         isMounted.current && loginUser();
-
         isMounted.current = true
-
     }, [profile])
 
     return (
         <div className={styles.root}>
+            <LoginAlertMessage message={responseMessage} setMessage={setResponseMessage} />
             <form className={styles.root__form} onSubmit={handleSubmit(onSubmit)}>
                 <div className={styles.root__form__logo}>
                     <img src={Logo} alt="logo" />

@@ -1,8 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
+import guest from './reducers/guestReducer';
 
 export const store = configureStore({
     reducer: {
-
+        guest
     }
 })
 

@@ -11,19 +11,25 @@ import styles from './index.module.scss';
 
 import Logo from './images/logo.svg';
 
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import RegistrationButton from '../RegistrationButton';
 import RegistrationFormBody from '../RegistrationFormBody';
+import RegistrationAlertMessage from '../RegistrationAlertMessage';
 
 
 const RegistrationBody = () => {
 
+    const navigate = useNavigate();
+
     const isMounted = useRef<boolean>(false);
+
+    const [responseMessage, setResponseMessage] = useState<string>('');
 
     const [profile, setProfile] = useState<IProfile>({ name: '', password: '', gender: '', surname: '', email: '' });
 
     const [registerUser, isRegistrationLoading] = useFetching(async () => {
-        fetchRegistration(profile);
+        const { isError, message } = await fetchRegistration(profile);
+        isError ? setResponseMessage(message) : navigate('/login')
     })
 
     const [gender, setGender] = useState<string>('');
@@ -49,6 +55,7 @@ const RegistrationBody = () => {
 
     return (
         <div className={styles.root}>
+            <RegistrationAlertMessage message={responseMessage} setMessage={setResponseMessage} />
             <form className={styles.root__form} onSubmit={handleSubmit(onSubmit)}>
                 <div className={styles.root__form__logo}>
                     <img src={Logo} alt="logo" />

@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import Loader from './images/loader.svg';
+import CircularProgress from '@mui/material/CircularProgress';
 
 import styles from './index.module.scss';
 
@@ -11,8 +11,8 @@ interface LoginButtonProps {
 const LoginButton: FC<LoginButtonProps> = ({ loading }) => {
     return <button className={styles.root}>
         {loading
-            ? <div className={styles.root__loading}>
-                <img src={Loader} alt="loader" />
+            ? <div className={styles.root__loader}>
+                <CircularProgress color="inherit" />
             </div>
             : <>Login</>
         }

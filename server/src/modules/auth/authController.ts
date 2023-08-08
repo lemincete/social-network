@@ -21,7 +21,6 @@ class AuthController {
 
 
         } catch (e) {
-            console.log(e);
             next(e);
         }
     }

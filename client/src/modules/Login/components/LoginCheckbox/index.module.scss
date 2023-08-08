@@ -1,0 +1,14 @@
+.root {
+    display: flex;
+    align-items: center;
+    &__checkbox {
+        cursor: pointer;
+        width: 18px;
+        height: 18px;
+        color: rgb(180, 180, 180) !important;
+    }
+    &__label__checkbox {
+        padding-left: 5px;
+        cursor: pointer;
+    }
+}
