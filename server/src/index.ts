@@ -1,9 +1,15 @@
 import { config } from 'dotenv';
+
 import express from 'express';
 import http from 'http';
 import { Server } from 'socket.io';
 
 import cors from 'cors';
+
+import { errorMiddleware } from './middlewares/ErrorMiddleware';
+import router from './router';
+
+import mongoose from 'mongoose';
 
 import { CLIENT_URL } from './constants';
 
@@ -13,6 +19,9 @@ app.use(cors({
     origin: CLIENT_URL,
     credentials: true
 }))
+
+app.use('/api', router);
+app.use(errorMiddleware);
 
 const server = http.createServer(app);
 
@@ -37,6 +46,7 @@ const start = async () => {
             console.log('api is starting')
         })
 
+        await mongoose.connect(DB_URL);
 
     } catch (e) {
         console.log(e);
