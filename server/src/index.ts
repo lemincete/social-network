@@ -4,6 +4,8 @@ import express from 'express';
 import http from 'http';
 import { Server } from 'socket.io';
 
+import cookieParser from 'cookie-parser';
+
 import cors from 'cors';
 
 import { errorMiddleware } from './middlewares/ErrorMiddleware';
@@ -19,6 +21,8 @@ app.use(cors({
     origin: CLIENT_URL,
     credentials: true
 }))
+
+app.use(cookieParser());
 
 app.use('/api', router);
 app.use(errorMiddleware);

@@ -14,7 +14,8 @@ export interface IUser {
     password: string,
     name: string,
     surname: string,
-    gender: string
+    gender: string,
+    image: string
 }
 
 export interface IToken {

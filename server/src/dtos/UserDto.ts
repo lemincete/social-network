@@ -6,12 +6,14 @@ export class UserDto {
     surname;
     email;
     gender;
+    image;
 
     constructor(user: IUser) {
         this._id = user._id;
         this.name = user.name;
         this.surname = user.surname;
         this.email = user.email;
-        this.gender = user.gender
+        this.gender = user.gender;
+        this.image = user.image;
     }
 }
