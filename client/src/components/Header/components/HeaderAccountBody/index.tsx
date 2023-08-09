@@ -1,7 +1,11 @@
 import { FC } from 'react';
-import Test from '../../images/test.jpg';
+
 import Arrow from '../../images/arrow.svg';
+import DefaultAvatar from '../../images/default-avatar.svg';
+
 import styles from './index.module.scss';
+
+import { useAppSelector } from '../../../../hooks/useAppSelector';
 
 interface HeaderAccountBodyProps {
     isOpen: boolean,
@@ -12,6 +16,8 @@ interface HeaderAccountBodyProps {
 
 const HeaderAccountBody: FC<HeaderAccountBodyProps> = ({ setIsHover, setIsOpen, isOpen, isHover }) => {
 
+    const { user } = useAppSelector(state => state.user);
+
     const rootAccountBody = [styles.root];
 
     isHover && !isOpen && rootAccountBody.push(styles.hover);
@@ -20,7 +26,7 @@ const HeaderAccountBody: FC<HeaderAccountBodyProps> = ({ setIsHover, setIsOpen, 
     return (
         <div onMouseOver={() => setIsHover(true)} onMouseOut={() => setIsHover(false)} onClick={() => setIsOpen(!isOpen)} className={rootAccountBody.join(' ')}>
             <div className={styles.root__account_body_avatar}>
-                <img src={Test} alt="avatar" />
+                <img src={user?.image ? '' : DefaultAvatar} alt="avatar" />
             </div>
             <div className={styles.root__account_body_arrow}>
                 <img src={Arrow} alt="arrow" />

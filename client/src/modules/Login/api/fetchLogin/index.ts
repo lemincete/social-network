@@ -1,4 +1,4 @@
-import { $api } from "../../../../http";
+import $api from "../../../../http";
 import { ILoginForm } from "../../types";
 
 interface IFetchLoginResponse {

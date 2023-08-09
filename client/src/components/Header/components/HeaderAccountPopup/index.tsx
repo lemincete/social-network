@@ -3,9 +3,11 @@ import styles from './index.module.scss';
 import Settings from '../../images/settings.svg';
 import Logout from '../../images/logout.svg';
 import Question from '../../images/question.svg';
-import Test from '../../images/test.jpg';
 import Arrow from '../../images/arrow.svg';
 import Palette from '../../images/palette.svg';
+import DefaultAvatar from '../../images/default-avatar.svg';
+
+import { useAppSelector } from '../../../../hooks/useAppSelector';
 
 import { Link } from 'react-router-dom';
 
@@ -16,17 +18,19 @@ const HeaderAccountPopup = () => {
 
     const logout = () => {
         localStorage.removeItem('jwt');
-        window.location.reload();
+        window.location.replace('/');
     }
+
+    const { user } = useAppSelector(state => state.user);
 
     return (
         <div className={styles.root__account__popup}>
             <div className={styles.root__account__popup_account_info}>
                 <div className={styles.root__account__avatar}>
-                    <img src={Test} alt="avatar" />
+                    <img src={user?.image ? '' : DefaultAvatar} alt="avatar" />
                 </div>
                 <div className={styles.root__account__popup_account_info_body}>
-                    <div className={styles.root__account__popup_account_info_body_nickname}>Oleg Vinnik</div>
+                    <div className={styles.root__account__popup_account_info_body_nickname}>{user?.name} {user?.surname}</div>
                     <Link to="/profile" className={styles.root__account__popup_account_info_body_link}>
                         <div className={styles.root__account__popup_body_link_body}>Go to your profile!</div>
                         <div className={styles.root__account__popup_body_link_body_arrow}>
