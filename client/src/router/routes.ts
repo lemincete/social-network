@@ -5,6 +5,7 @@ import LoginPage from "../pages/LoginPage";
 import RegistrationPage from "../pages/RegistrationPage";
 import ErrorPage from "../pages/ErrorPage";
 import ProfilePage from "../pages/ProfilePage";
+import SettingsPage from "../pages/SettingsPage";
 
 import { NavigateToLogin } from "../pages/LoginPage";
 
@@ -22,6 +23,10 @@ const privateRoutesArr: RouterItem[] = [
     {
         path: '/profile',
         Component: ProfilePage
+    },
+    {
+        path: '/settings',
+        Component: SettingsPage
     },
     {
         path: '*',
