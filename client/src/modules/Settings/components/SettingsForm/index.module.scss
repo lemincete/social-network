@@ -1,11 +1,15 @@
 .root {
     &__form {
+        border: 2px solid rgb(230, 230, 230);
         flex: 0 1 80%;
+        padding: 15px 0;
+        border-radius: 5px;
     }
     &__form__item__block {
         display: flex;
         margin-bottom: 15px;
         position: relative;
+        padding: 0 15px;
         padding-bottom: 15px;
         column-gap: 20px;
         &::after {
@@ -19,21 +23,27 @@
         }
     }
     &__form__buttons {
-        margin-top: 25px;
+        margin-top: 20px;
         display: flex;
         column-gap: 10px;
+        padding: 0 15px;
     }
     &__form__button {
-        background: rgb(240, 240, 240);
+        background: none;
+        border: 2px solid rgb(240, 240, 240);
         color: gray;
         padding: 10px;
         border-radius: 10px;
         font-size: 15px;
-    }
-    &__form__button__cancel {
-        background: none;
-        border: 2px solid rgb(240, 240, 240);
-    }
-    &__form__button__save {
+        &:disabled {
+            cursor: default;
+        }
+        &.active {
+            border: none;
+            background: rgb(240, 240, 240);
+        }
+        a {
+            color: gray;
+        }
     }
 }

@@ -1,6 +1,7 @@
 import { RegisterOptions } from "react-hook-form";
 
 export interface ISettingsForm {
+    [key: string]: string
     name: string;
     surname: string;
     email: string;

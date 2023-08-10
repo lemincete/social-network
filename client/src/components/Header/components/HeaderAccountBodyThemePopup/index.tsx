@@ -8,8 +8,6 @@ const HeaderAccountBodyThemePopup = () => {
     const [activeTheme, setActiveTheme] = useState<string>(themes[0]);
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
-    console.log(activeTheme);
-
     const chooseTheme = (theme: string) => {
         setIsOpen(false);
         setActiveTheme(theme);

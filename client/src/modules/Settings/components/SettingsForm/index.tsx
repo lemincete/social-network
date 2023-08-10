@@ -1,8 +1,12 @@
 import styles from './index.module.scss';
 
+import { useMemo } from 'react';
+
 import SettingsInputBody from '../SettingsInputBody';
 import SettingsPasswordInput from '../SettingsPasswordInput';
 import { Link } from 'react-router-dom';
+
+import { useIsFormChanged } from '../../hooks/useIsFormChanged';
 
 import { useFormContext, SubmitHandler } from 'react-hook-form';
 
@@ -10,7 +14,22 @@ import { ISettingsForm } from '../../types';
 
 const SettingsForm = () => {
 
-    const { handleSubmit } = useFormContext<ISettingsForm>();
+    const { handleSubmit, watch } = useFormContext<ISettingsForm>();
+
+    const watchedFields = {
+        name: watch('name'),
+        surname: watch('surname'),
+        gender: watch('gender'),
+        email: watch('email'),
+        newPassword: watch('newPassword'),
+        confirmPassword: watch('confirmPassword')
+    }
+
+    const isFormChanged = useIsFormChanged(watchedFields);
+
+    const rootButtonStyles = [styles.root__form__button];
+
+    isFormChanged && rootButtonStyles.push(styles.active);
 
     const onSubmit: SubmitHandler<ISettingsForm> = data => {
         console.log(data);
@@ -31,8 +50,10 @@ const SettingsForm = () => {
                 <SettingsPasswordInput name="confirmPassword" />
             </div>
             <div className={styles.root__form__buttons}>
-                <button type="submit" className={styles.root__form__button}>Save</button>
-                <Link to="/profile" className={[styles.root__form__button, styles.root__form__button__cancel].join(' ')}>Cancel</Link>
+                <button disabled={!isFormChanged} type="submit" className={rootButtonStyles.join(' ')}>Save</button>
+                <button className={styles.root__form__button}>
+                    <Link to="/profile" >Cancel</Link>
+                </button>
             </div>
         </form>
     );
