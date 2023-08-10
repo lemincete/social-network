@@ -6,7 +6,9 @@ import LoginBody from "./components/LoginBody";
 
 const Login = () => {
 
-    const methods = useForm<ILoginForm>();
+    const methods = useForm<ILoginForm>({
+        mode: 'onChange'
+    });
 
     return (
         <FormProvider {...methods}>

@@ -4,18 +4,14 @@ import styles from './index.module.scss';
 
 import { useFormContext, RegisterOptions } from 'react-hook-form';
 
-import { ISettingsForm } from '../../types';
+import { ISettingsForm, IInputListItem } from '../../types';
 
 import { getCapitalizeString } from '../../helpers/getCapitalizeString';
 
 import { useAppSelector } from '../../../../hooks/useAppSelector';
 
-interface SettingsInputBodyProps {
-    name: 'name' | 'surname' | 'email' | 'gender'
-    options?: RegisterOptions<ISettingsForm>
-}
 
-const SettingsInputBody: FC<SettingsInputBodyProps> = ({ name, options }) => {
+const SettingsInputBody: FC<IInputListItem> = ({ name, options }) => {
 
     const { register } = useFormContext<ISettingsForm>();
 
@@ -28,7 +24,7 @@ const SettingsInputBody: FC<SettingsInputBodyProps> = ({ name, options }) => {
     return (
         <div className={styles.root}>
             <h3 className={styles.root__title}>{getCapitalizeString(name)}</h3>
-            <input defaultValue={user[name]} {...register(name, options)} className={styles.root__input} type="text" />
+            <input defaultValue={name !== 'newPassword' && name !== 'confirmPassword' ? user[name] : ''} {...register(name, options)} className={styles.root__input} type="text" />
         </div>
     );
 }

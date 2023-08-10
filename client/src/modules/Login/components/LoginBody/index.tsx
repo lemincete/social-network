@@ -1,6 +1,6 @@
 import styles from './index.module.scss';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useCallback } from 'react';
 
 import { useFormContext, SubmitHandler } from 'react-hook-form';
 
@@ -20,32 +20,23 @@ import LoginAlertMessage from '../LoginAlertMessage';
 
 const LoginBody = () => {
 
-    const isMounted = useRef<boolean>(false);
-
     const [responseMessage, setResponseMessage] = useState<string>('');
 
-    const [profile, setProfile] = useState<ILoginForm>({ email: '', password: '' });
-
-    const [loginUser, isLoginLoading] = useFetching(async () => {
+    const [loginUser, isLoginLoading] = useFetching(async (profile: ILoginForm) => {
         const { isError, message } = await fetchLogin(profile);
         isError ? setResponseMessage(message) : successfulLogin(message)
     });
 
-    const successfulLogin = (jwt: string) => {
+    const successfulLogin = useCallback((jwt: string) => {
         localStorage.setItem('jwt', jwt);
         window.location.replace('/');
-    }
+    }, [])
 
     const { handleSubmit } = useFormContext<ILoginForm>();
 
-    const onSubmit: SubmitHandler<ILoginForm> = (data) => {
-        setProfile(data);
+    const onSubmit: SubmitHandler<ILoginForm> = (data: ILoginForm) => {
+        loginUser(data);
     }
-
-    useEffect(() => {
-        isMounted.current && loginUser();
-        isMounted.current = true
-    }, [profile])
 
     return (
         <div className={styles.root}>

@@ -1,6 +1,6 @@
 import { SubmitHandler, useFormContext } from 'react-hook-form';
 import { usePasswordsMatched } from '../../hooks/usePasswordsMatched';
-import { useEffect, useState, useRef } from 'react';
+import { useState } from 'react';
 import { useFetching } from '../../../../hooks/useFetching';
 
 import { fetchRegistration } from '../../api/fetchRegistration';
@@ -21,13 +21,9 @@ const RegistrationBody = () => {
 
     const navigate = useNavigate();
 
-    const isMounted = useRef<boolean>(false);
-
     const [responseMessage, setResponseMessage] = useState<string>('');
 
-    const [profile, setProfile] = useState<IProfile>({ name: '', password: '', gender: '', surname: '', email: '' });
-
-    const [registerUser, isRegistrationLoading] = useFetching(async () => {
+    const [registerUser, isRegistrationLoading] = useFetching(async (profile: IProfile) => {
         const { isError, message } = await fetchRegistration(profile);
         isError ? setResponseMessage(message) : navigate('/login')
     })
@@ -42,16 +38,9 @@ const RegistrationBody = () => {
 
         if (isPasswordsMatched) {
             const { otherGender, confirmPassword, ...profile } = data;
-            setProfile({ ...profile, gender: gender === 'Other' ? otherGender : gender });
+            registerUser({ ...profile, gender: gender === 'Other' ? otherGender : gender })
         }
     }
-
-
-    useEffect(() => {
-        isMounted.current && registerUser();
-        isMounted.current = true;
-
-    }, [profile])
 
     return (
         <div className={styles.root}>

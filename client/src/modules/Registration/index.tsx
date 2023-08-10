@@ -6,7 +6,9 @@ import { IRegistrationForm } from "./types";
 
 const Registration = () => {
 
-    const methods = useForm<IRegistrationForm>();
+    const methods = useForm<IRegistrationForm>({
+        mode: 'onChange'
+    });
 
     return (
         <FormProvider {...methods}>

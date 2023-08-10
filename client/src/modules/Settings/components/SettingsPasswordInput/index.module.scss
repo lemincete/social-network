@@ -1,0 +1,29 @@
+.root {
+    &__input__body {
+        position: relative;
+    }
+    &__input {
+        width: 100%;
+        border: 1px solid rgb(230, 230, 230);
+        padding: 5px;
+        border-radius: 5px;
+        display: block;
+        &:focus {
+            border: 2px solid #459ef7;
+        }
+    }
+    &__title {
+        margin-bottom: 5px;
+    }
+    &__eye__body {
+        cursor: pointer;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 5px;
+        img {
+            width: 22px;
+            height: 22px;
+        }
+    }
+}

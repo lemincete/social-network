@@ -7,57 +7,14 @@
     }
     &__title {
         font-size: 16px;
-        margin-bottom: 15px;
+        margin-bottom: 20px;
     }
     &__container {
         max-width: 800px;
         margin: 0 auto;
     }
-    &__avatar img {
-        width: 100px;
-        height: 100px;
-    }
     &__container__body {
         display: flex;
         column-gap: 20px;
-    }
-    &__avatar__body {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-    &__photo__btn {
-        background: none;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        column-gap: 5px;
-        padding: 5px 10px;
-        border: 2px solid #fff;
-        border-radius: 5px;
-        img {
-            width: 20px;
-            height: 20px;
-        }
-        &:hover {
-            border: 2px solid rgb(230, 230, 230);
-        }
-    }
-    &__avatar__buttons {
-        margin-top: 5px;
-        row-gap: 3px;
-        display: flex;
-        flex-direction: column;
-    }
-    &__form__buttons {
-        margin-top: 10px;
-        display: flex;
-        column-gap: 10px;
-    }
-    &__form__button {
-    }
-    &__form__button__cancel {
-    }
-    &__form__button__save {
     }
 }
