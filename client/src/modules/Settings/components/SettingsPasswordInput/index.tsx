@@ -30,7 +30,7 @@ const SettingsPasswordInput: FC<SettingsInputProps> = ({ name }) => {
         <div className={styles.root}>
             <h3 className={styles.root__title}>{name === 'newPassword' ? 'New password' : 'Confirm password'}</h3>
             <div className={styles.root__input__body}>
-                <input {...register(name, { minLength: 8, maxLength: 16 })} required type={isShow ? 'text' : 'password'} className={styles.root__input} />
+                <input {...register(name, { minLength: 8, maxLength: 16 })} type={isShow ? 'text' : 'password'} className={styles.root__input} />
                 <div onClick={changeShowingPassword} className={styles.root__eye__body}>
                     <img src={isShow ? OpenEye : CloseEye} alt="eye" />
                 </div>

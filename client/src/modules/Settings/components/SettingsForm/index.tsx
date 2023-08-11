@@ -1,6 +1,6 @@
 import styles from './index.module.scss';
 
-import { useMemo } from 'react';
+import { useSettingsContext } from '../../context/settingsContext';
 
 import SettingsInputBody from '../SettingsInputBody';
 import SettingsPasswordInput from '../SettingsPasswordInput';
@@ -12,9 +12,28 @@ import { useFormContext, SubmitHandler } from 'react-hook-form';
 
 import { ISettingsForm } from '../../types';
 
+import { useFetching } from '../../../../hooks/useFetching';
+
+import { fetchUpdateProfile } from '../../api/fetchUpdateProfile';
+
+interface IUpdateProfile {
+    name: string,
+    surname: string,
+    gender: string,
+    email: string,
+    password: string,
+    image: string
+}
+
 const SettingsForm = () => {
 
     const { handleSubmit, watch } = useFormContext<ISettingsForm>();
+
+    const { image } = useSettingsContext();
+
+    const [fetchUpdateUser, isUpdateUserLoading] = useFetching(async (profile: IUpdateProfile) => {
+        await fetchUpdateProfile(profile);
+    })
 
     const watchedFields = {
         name: watch('name'),
@@ -22,17 +41,20 @@ const SettingsForm = () => {
         gender: watch('gender'),
         email: watch('email'),
         newPassword: watch('newPassword'),
-        confirmPassword: watch('confirmPassword')
+        confirmPassword: watch('confirmPassword'),
     }
 
-    const isFormChanged = useIsFormChanged(watchedFields);
+    const isFormChanged = useIsFormChanged(watchedFields, image);
 
     const rootButtonStyles = [styles.root__form__button];
 
     isFormChanged && rootButtonStyles.push(styles.active);
 
     const onSubmit: SubmitHandler<ISettingsForm> = data => {
-        console.log(data);
+
+        const { confirmPassword, newPassword, ...profile } = data
+
+        fetchUpdateUser({ ...profile, password: newPassword, image });
     }
 
     return (

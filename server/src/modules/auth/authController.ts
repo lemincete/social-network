@@ -19,7 +19,6 @@ class AuthController {
 
             return res.json({ accessToken });
 
-
         } catch (e) {
             next(e);
         }

@@ -27,7 +27,7 @@ const HeaderAccountPopup = () => {
         <div className={styles.root__account__popup}>
             <div className={styles.root__account__popup_account_info}>
                 <div className={styles.root__account__avatar}>
-                    <img src={user?.image ? '' : DefaultAvatar} alt="avatar" />
+                    <img src={user?.image || DefaultAvatar} alt="avatar" />
                 </div>
                 <div className={styles.root__account__popup_account_info_body}>
                     <div className={styles.root__account__popup_account_info_body_nickname}>{user?.name} {user?.surname}</div>

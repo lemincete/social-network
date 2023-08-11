@@ -8,10 +8,8 @@ interface IFetchLoginResponse {
 export const fetchLogin = async (profile: ILoginForm): Promise<{ isError: boolean, message: string }> => {
     try {
 
-        const { email, password } = profile;
-
         const { data } = await $api.post<IFetchLoginResponse>('auth/login', {}, {
-            params: { email, password }
+            params: { ...profile }
         })
 
         return { isError: false, message: data.accessToken }

@@ -13,18 +13,32 @@ import router from './router';
 
 import mongoose from 'mongoose';
 
+import { v2 as cloudinary } from 'cloudinary';
+
+config({ path: "./config/.env" });
+
+cloudinary.config({
+    cloud_name: process.env.CLOUD_NAME as string,
+    api_key: process.env.CLOUD_API_KEY as string,
+    api_secret: process.env.CLOUD_API_SECRET_KEY as string,
+    secure: true,
+})
+
 import { CLIENT_URL } from './constants';
 
 const app = express();
 
 app.use(cors({
     origin: CLIENT_URL,
-    credentials: true
+    credentials: true,
 }))
 
 app.use(cookieParser());
+app.use(express.json({ limit: '25mb' }));
+app.use(express.urlencoded({ limit: '25mb', extended: true }));
 
 app.use('/api', router);
+
 app.use(errorMiddleware);
 
 const server = http.createServer(app);
@@ -34,8 +48,6 @@ const io = new Server(server, {
         origin: CLIENT_URL
     }
 });
-
-config({ path: "./config/.env" });
 
 const { DB_URL, PORT } = process.env as { DB_URL: string, PORT: string };
 

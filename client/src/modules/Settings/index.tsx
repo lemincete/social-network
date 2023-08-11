@@ -8,7 +8,9 @@ import SettingsBody from './components/SettingsBody';
 
 const Settings = () => {
 
-    const methods = useForm<ISettingsForm>();
+    const methods = useForm<ISettingsForm>({
+        mode: 'onChange'
+    });
 
     return (
         <>

@@ -24,7 +24,7 @@ const SettingsInputBody: FC<IInputListItem> = ({ name, options }) => {
     return (
         <div className={styles.root}>
             <h3 className={styles.root__title}>{getCapitalizeString(name)}</h3>
-            <input defaultValue={name !== 'newPassword' && name !== 'confirmPassword' ? user[name] : ''} {...register(name, options)} className={styles.root__input} type="text" />
+            <input required defaultValue={name !== 'newPassword' && name !== 'confirmPassword' ? user[name] : ''} {...register(name, options)} className={styles.root__input} type="text" />
         </div>
     );
 }

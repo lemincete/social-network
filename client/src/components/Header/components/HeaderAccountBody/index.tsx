@@ -26,7 +26,7 @@ const HeaderAccountBody: FC<HeaderAccountBodyProps> = ({ setIsHover, setIsOpen, 
     return (
         <div onMouseOver={() => setIsHover(true)} onMouseOut={() => setIsHover(false)} onClick={() => setIsOpen(!isOpen)} className={rootAccountBody.join(' ')}>
             <div className={styles.root__account_body_avatar}>
-                <img src={user?.image ? '' : DefaultAvatar} alt="avatar" />
+                <img src={user?.image || DefaultAvatar} alt="avatar" />
             </div>
             <div className={styles.root__account_body_arrow}>
                 <img src={Arrow} alt="arrow" />
