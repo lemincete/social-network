@@ -1,14 +1,13 @@
-import Header from "../../components/Header";
 import styles from './index.module.scss';
 
+import Header from '../../components/Header';
 
-const Home = () => {
-
+const Feed = () => {
     return (
         <div className={styles.root}>
             <Header />
         </div>
-    )
+    );
 }
 
-export default Home;
+export default Feed;

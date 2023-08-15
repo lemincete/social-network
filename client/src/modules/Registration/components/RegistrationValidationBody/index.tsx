@@ -6,7 +6,7 @@ import { IFieldsName } from '../../types';
 
 interface RegistrationValidationBodyProps {
     type?: string,
-    name: IFieldsName
+    name: IFieldsName,
 }
 
 const RegistrationValidationBody: FC<RegistrationValidationBodyProps> = ({ type, name }) => {

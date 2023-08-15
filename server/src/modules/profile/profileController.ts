@@ -29,9 +29,9 @@ class ProfileController {
 
             const { name, surname, email, gender, password, image } = req.body as { name: string, surname: string, email: string, gender: string, password: string, image: string | null }
 
-            const message = await ProfileService.updateProfile(userId, name, surname, email, gender, password, image);
+            const user = await ProfileService.updateProfile(userId, name, surname, email, gender, password, image);
 
-            return res.json({ message });
+            return res.json({ user });
 
         } catch (e) {
             console.log(e);

@@ -1,16 +1,23 @@
 import { RegisterOptions } from "react-hook-form";
 
-export interface ISettingsForm {
+export interface ISettingsProfile {
     [key: string]: string
     name: string;
     surname: string;
     email: string;
     gender: string;
-    newPassword: string,
+    password: string,
     confirmPassword: string
 }
 
+export type ISettingsForm = Omit<ISettingsProfile, 'gender'> & {
+    otherGender: string,
+    confirmPassword: string
+}
+
+export type IFieldsName = 'name' | 'surname' | 'email' | 'gender' | 'password' | 'confirmPassword';
+
 export interface IInputListItem {
-    name: 'name' | 'surname' | 'email' | 'gender' | 'newPassword' | 'confirmPassword'
-    options?: RegisterOptions<ISettingsForm>
+    name: IFieldsName;
+    options?: RegisterOptions<ISettingsForm>;
 }

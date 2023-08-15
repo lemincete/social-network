@@ -1,10 +1,16 @@
+import { useState, FC } from 'react';
+
 import styles from './index.module.scss';
 
-import { useSettingsContext } from '../../context/settingsContext';
-
 import SettingsInputBody from '../SettingsInputBody';
-import SettingsPasswordInput from '../SettingsPasswordInput';
-import { Link } from 'react-router-dom';
+import SettingsPasswordsBody from '../SettingsPasswordsBody';
+import SettingsGenderBody from '../SettingsGenderBody';
+import { useNavigate } from 'react-router-dom';
+import SettingsButtonBody from '../SettingsButtonsBody';
+
+import { useAppDispatch } from '../../../../hooks/useAppDispatch';
+import { useAppSelector } from '../../../../hooks/useAppSelector';
+import { addUserAction } from '../../../../store/reducers/userReducer';
 
 import { useIsFormChanged } from '../../hooks/useIsFormChanged';
 
@@ -15,6 +21,7 @@ import { ISettingsForm } from '../../types';
 import { useFetching } from '../../../../hooks/useFetching';
 
 import { fetchUpdateProfile } from '../../api/fetchUpdateProfile';
+import { IUser } from '../../../../types';
 
 interface IUpdateProfile {
     name: string,
@@ -25,58 +32,58 @@ interface IUpdateProfile {
     image: string
 }
 
-const SettingsForm = () => {
+const nativeGenders = ['Male', 'Female']
 
-    const { handleSubmit, watch } = useFormContext<ISettingsForm>();
+interface SettingsFormProps {
+    setResponseMessage: (message: string) => void
+}
 
-    const { image } = useSettingsContext();
+const SettingsForm: FC<SettingsFormProps> = ({ setResponseMessage }) => {
+
+    const dispatch = useAppDispatch();
+
+    const navigate = useNavigate();
+
+    const { imageBody } = useAppSelector(state => state.avatar);
+    const { user } = useAppSelector(state => state.user);
+
+    const { handleSubmit } = useFormContext<ISettingsForm>();
+
+    const [gender, setGender] = useState<string>(user ? (nativeGenders.includes(user.gender) ? user.gender : 'Other') : '');
 
     const [fetchUpdateUser, isUpdateUserLoading] = useFetching(async (profile: IUpdateProfile) => {
-        await fetchUpdateProfile(profile);
+        const response = await fetchUpdateProfile(profile);
+        typeof response === 'string' ? setResponseMessage(response) : successfulUpdate(response);
     })
 
-    const watchedFields = {
-        name: watch('name'),
-        surname: watch('surname'),
-        gender: watch('gender'),
-        email: watch('email'),
-        newPassword: watch('newPassword'),
-        confirmPassword: watch('confirmPassword'),
+    const successfulUpdate = (user: IUser) => {
+        dispatch(addUserAction(user));
+        navigate('/profile')
     }
 
-    const isFormChanged = useIsFormChanged(watchedFields, image);
-
-    const rootButtonStyles = [styles.root__form__button];
-
-    isFormChanged && rootButtonStyles.push(styles.active);
+    const isFormChanged = useIsFormChanged(gender);
 
     const onSubmit: SubmitHandler<ISettingsForm> = data => {
 
-        const { confirmPassword, newPassword, ...profile } = data
+        const { confirmPassword, otherGender, ...profile } = data
 
-        fetchUpdateUser({ ...profile, password: newPassword, image });
+        fetchUpdateUser({ ...profile, image: imageBody.image, gender: gender === 'Other' ? otherGender : gender });
     }
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className={styles.root__form}>
             <div className={styles.root__form__item__block}>
-                <SettingsInputBody name='name' />
-                <SettingsInputBody name='surname' />
+                <SettingsInputBody name='name' options={{ pattern: /^[^\d\s]*$/, minLength: 2, maxLength: 14 }} />
+                <SettingsInputBody name='surname' options={{ pattern: /^[^\s\d]*$/, minLength: 2, maxLength: 14 }} />
             </div>
             <div className={styles.root__form__item__block}>
-                <SettingsInputBody name="gender" />
-                <SettingsInputBody name="email" />
+                <SettingsInputBody name="email" options={{ pattern: /^\w+@[a-z]+\.[a-z]+$/ }} />
             </div>
             <div className={styles.root__form__item__block}>
-                <SettingsPasswordInput name="newPassword" />
-                <SettingsPasswordInput name="confirmPassword" />
+                <SettingsGenderBody gender={gender} setGender={setGender} />
             </div>
-            <div className={styles.root__form__buttons}>
-                <button disabled={!isFormChanged} type="submit" className={rootButtonStyles.join(' ')}>Save</button>
-                <button className={styles.root__form__button}>
-                    <Link to="/profile" >Cancel</Link>
-                </button>
-            </div>
+            <SettingsPasswordsBody />
+            <SettingsButtonBody loading={isUpdateUserLoading} isChanged={isFormChanged} />
         </form>
     );
 }

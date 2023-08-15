@@ -1,10 +1,4 @@
 .root {
-    &__form {
-        border: 2px solid rgb(230, 230, 230);
-        flex: 0 1 80%;
-        padding: 15px 0;
-        border-radius: 5px;
-    }
     &__form__item__block {
         display: flex;
         margin-bottom: 15px;

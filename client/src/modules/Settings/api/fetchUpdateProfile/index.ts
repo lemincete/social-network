@@ -1,11 +1,26 @@
 import $api from "../../../../http";
 
-export const fetchUpdateProfile = async (profile: { name: string, surname: string, gender: string, password: string, email: string, image: string }) => {
+import { IUser } from "../../../../types";
+
+interface IUpdateProfileForm {
+    name: string,
+    surname: string,
+    gender: string,
+    password: string,
+    email: string,
+    image: string
+}
+
+interface IFetchUpdateProfileResponse {
+    user: IUser
+}
+
+
+export const fetchUpdateProfile = async (profile: IUpdateProfileForm): Promise<IUser | string> => {
     try {
-        const { data } = await $api.post('profile/update', { ...profile })
-    } catch (e) {
-        console.log(e);
+        const { data } = await $api.post<IFetchUpdateProfileResponse>('profile/update', { ...profile });
+        return data.user
+    } catch (e: any) {
+        return e.response.data.message
     }
-
-
 }

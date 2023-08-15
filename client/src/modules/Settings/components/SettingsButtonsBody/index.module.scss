@@ -1,0 +1,32 @@
+.root {
+    &__buttons {
+        margin-top: 20px;
+        display: flex;
+        column-gap: 10px;
+        padding: 0 15px;
+    }
+    &__button {
+        background: none;
+        border: 2px solid rgb(240, 240, 240);
+        color: gray;
+        padding: 10px;
+        border-radius: 10px;
+        font-size: 15px;
+        &:disabled {
+            cursor: default;
+        }
+        &.active {
+            border: none;
+            background: rgb(240, 240, 240);
+        }
+        a {
+            color: gray;
+        }
+    }
+    &__loader {
+        span {
+            width: 16px !important;
+            height: 16px !important;
+        }
+    }
+}

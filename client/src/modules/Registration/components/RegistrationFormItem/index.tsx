@@ -10,7 +10,6 @@ import { RegisterOptions } from "react-hook-form"
 import styles from './index.module.scss';
 
 import RegistrationPasswordInput from '../RegistrationPasswordInput';
-import RegistrationValidationPasswordsBody from '../RegistrationValidationPasswordsBody';
 import RegistrationValidationErrorMessage from '../RegistrationValidationErrorMessage';
 import RegistrationValidationBody from '../RegistrationValidationBody';
 
@@ -37,7 +36,7 @@ const RegistrationFormItem: FC<RegistrationFormItemProps> = ({ name, isPassword,
             {isPassword
                 ? <>
                     {!isPasswordsMatched && <RegistrationValidationErrorMessage>Passwords don't match</RegistrationValidationErrorMessage>}
-                    <RegistrationValidationPasswordsBody type={errors[name]?.type} />
+                    <RegistrationValidationBody type={errors[name]?.type} name="password" />
                 </>
                 : <RegistrationValidationBody type={errors[name]?.type} name={name} />
             }

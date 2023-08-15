@@ -1,13 +1,14 @@
 import { FC } from "react";
 
-import HomePage from "../pages/HomePage";
 import LoginPage from "../pages/LoginPage";
 import RegistrationPage from "../pages/RegistrationPage";
 import ErrorPage from "../pages/ErrorPage";
 import ProfilePage from "../pages/ProfilePage";
 import SettingsPage from "../pages/SettingsPage";
+import FeedPage from "../pages/FeedPage";
 
 import { NavigateToLogin } from "../pages/LoginPage";
+import { NavigateToFeed } from "../pages/FeedPage";
 
 
 interface RouterItem {
@@ -18,7 +19,11 @@ interface RouterItem {
 const privateRoutesArr: RouterItem[] = [
     {
         path: '/',
-        Component: HomePage
+        Component: NavigateToFeed
+    },
+    {
+        path: '/feed',
+        Component: FeedPage
     },
     {
         path: '/profile',

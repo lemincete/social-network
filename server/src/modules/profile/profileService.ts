@@ -21,7 +21,7 @@ class ProfileService {
 
         return userDto
     }
-    async updateProfile(user: string, name: string, surname: string, email: string, gender: string, password: string, image: string | null) {
+    async updateProfile(user: string, name: string, surname: string, email: string, gender: string, password: string, image: string | null): Promise<UserDto> {
 
         if (password.length > 0) {
             if (password.length < 8) {
@@ -50,22 +50,28 @@ class ProfileService {
         }
 
         if (image) {
+
             await cloudinary.uploader.upload(image, { public_id: `${name}_avatar`, folder: 'fanee/users' }, (error, result) => {
 
                 const imageUrl = result?.secure_url
 
                 if (imageUrl) {
                     candidate.image = imageUrl
+                } else {
+                    throw ApiError.badRequest(400, 'Error upload image')
                 }
             });
+        } else if (image === null) {
+            candidate.image = ''
         }
-
 
         Object.assign(candidate, updatedFields);
 
         const result = await candidate.save();
 
-        return result._id ? true : false
+        const userDto = new UserDto(result);
+
+        return userDto
 
     }
 }

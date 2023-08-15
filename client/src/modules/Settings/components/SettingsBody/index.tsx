@@ -4,23 +4,21 @@ import styles from './index.module.scss';
 
 import SettingsForm from '../SettingsForm';
 import SettingsAvatarBody from '../SettingsAvatarBody';
+import SettingsAlertMessage from '../SettingsAlertMessage';
 
-import { SettingsContext } from '../../context/settingsContext';
 
 const SettingsBody = () => {
 
-    const [image, setImage] = useState<string | null | ArrayBuffer>(null);
-    const [previewImagePath, setPreviewImagePath] = useState<string | null>(null);
+    const [errorResponseMessage, setErrorResponseMessage] = useState<string>('');
 
     return (
         <div className={styles.root__container}>
+            <SettingsAlertMessage message={errorResponseMessage} setMessage={setErrorResponseMessage} />
             <div className={styles.root__body}>
                 <h3 className={styles.root__title}>Settings:</h3>
                 <div className={styles.root__container__body}>
-                    <SettingsContext.Provider value={{ image, setImage, previewImagePath, setPreviewImagePath }}>
-                        <SettingsAvatarBody />
-                        <SettingsForm />
-                    </SettingsContext.Provider>
+                    <SettingsAvatarBody />
+                    <SettingsForm setResponseMessage={setErrorResponseMessage} />
                 </div>
             </div>
         </div>

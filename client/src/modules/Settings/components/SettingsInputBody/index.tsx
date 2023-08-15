@@ -1,8 +1,10 @@
 import { FC } from 'react';
 
+import SettingsValidationBody from '../SettingsValidationBody';
+
 import styles from './index.module.scss';
 
-import { useFormContext, RegisterOptions } from 'react-hook-form';
+import { useFormContext } from 'react-hook-form';
 
 import { ISettingsForm, IInputListItem } from '../../types';
 
@@ -13,7 +15,7 @@ import { useAppSelector } from '../../../../hooks/useAppSelector';
 
 const SettingsInputBody: FC<IInputListItem> = ({ name, options }) => {
 
-    const { register } = useFormContext<ISettingsForm>();
+    const { register, formState: { errors } } = useFormContext<ISettingsForm>();
 
     const { user } = useAppSelector(state => state.user);
 
@@ -24,7 +26,8 @@ const SettingsInputBody: FC<IInputListItem> = ({ name, options }) => {
     return (
         <div className={styles.root}>
             <h3 className={styles.root__title}>{getCapitalizeString(name)}</h3>
-            <input required defaultValue={name !== 'newPassword' && name !== 'confirmPassword' ? user[name] : ''} {...register(name, options)} className={styles.root__input} type="text" />
+            <input required defaultValue={name !== 'password' && name !== 'confirmPassword' ? user[name] : ''} {...register(name, options)} className={styles.root__input} type="text" />
+            <SettingsValidationBody type={errors[name]?.type} name={name} />
         </div>
     );
 }
