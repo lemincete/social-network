@@ -20,6 +20,20 @@ class ProfileController {
         }
     }
 
+    async getMySubs(req: Request, res: Response, next: NextFunction) {
+        try {
+
+            const { userId } = req;
+
+            const subs = await ProfileService.getMySubs(userId);
+
+            return res.json({ ...subs })
+
+        } catch (e) {
+            next(e);
+        }
+    }
+
     async updateProfile(req: Request, res: Response, next: NextFunction) {
         try {
 

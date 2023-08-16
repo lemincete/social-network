@@ -15,10 +15,17 @@ export interface IUser {
     name: string,
     surname: string,
     gender: string,
-    image: string
+    image: string,
+    bio: string
 }
 
 export interface IToken {
     user: Schema.Types.ObjectId,
     refreshToken: string
+}
+
+export interface ISubs {
+    user: Schema.Types.ObjectId,
+    subscribers: string[],
+    subscriptions: string[],
 }

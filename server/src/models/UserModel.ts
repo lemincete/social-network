@@ -8,7 +8,8 @@ const UserModel = new Schema<IUser>({
     name: { type: String, required: true },
     surname: { type: String, required: true },
     gender: { type: String, required: true },
-    image: { type: String, default: '' }
+    image: { type: String, default: '' },
+    bio: { type: String, default: '' }
 })
 
 export default model<IUser>('User', UserModel);

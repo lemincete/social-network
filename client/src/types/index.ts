@@ -5,5 +5,11 @@ export interface IUser {
     surname: string,
     email: string,
     gender: string,
-    image: string
+    image: string,
+    bio: string
+}
+
+export interface ISubs {
+    subscribers: string[],
+    subscriptions: string[]
 }

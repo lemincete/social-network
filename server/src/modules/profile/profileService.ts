@@ -1,4 +1,6 @@
 import UserModel from "../../models/UserModel";
+import SubsModel from "../../models/SubsModel";
+
 import { UserDto } from "../../dtos/UserDto";
 
 import { ApiError } from "../../exceptions/ApiError";
@@ -8,6 +10,8 @@ import { stringToCapitalize } from "./helpers/stringToCapitalize";
 import bcrypt from 'bcrypt';
 
 import { v2 as cloudinary } from 'cloudinary';
+
+import { SubsDto } from "../../dtos/SubsDto";
 
 class ProfileService {
     async getMyProfile(userId: string): Promise<UserDto> {
@@ -21,6 +25,20 @@ class ProfileService {
 
         return userDto
     }
+
+    async getMySubs(user: string): Promise<SubsDto> {
+        const subs = await SubsModel.findOne({ user });
+
+        if (!subs) {
+            throw ApiError.badRequest(400, 'Subs not found');
+        }
+
+        const subsDto = new SubsDto(subs);
+
+        return subsDto
+
+    }
+
     async updateProfile(user: string, name: string, surname: string, email: string, gender: string, password: string, image: string | null): Promise<UserDto> {
 
         if (password.length > 0) {

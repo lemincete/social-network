@@ -7,6 +7,7 @@ export class UserDto {
     email;
     gender;
     image;
+    bio;
 
     constructor(user: IUser) {
         this._id = user._id;
@@ -15,5 +16,6 @@ export class UserDto {
         this.email = user.email;
         this.gender = user.gender;
         this.image = user.image;
+        this.bio = user.bio
     }
 }

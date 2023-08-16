@@ -10,6 +10,7 @@ import controller from './profileController';
 const router = Router();
 
 router.get('/me', checkAuth, controller.getMyProfile);
+router.get('/subs', checkAuth, controller.getMySubs);
 router.post('/update', [
     body('name', `Name is too short`).isLength({ min: 2 }),
     body('surname', `Surname is too short`).isLength({ min: 2 }),
