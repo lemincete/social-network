@@ -21,3 +21,8 @@ export interface IInputListItem {
     name: IFieldsName;
     options?: RegisterOptions<ISettingsForm>;
 }
+
+export interface SettingsOptionItem {
+    name: string,
+    image: any
+}

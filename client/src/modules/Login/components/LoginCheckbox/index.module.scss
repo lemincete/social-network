@@ -7,8 +7,10 @@
         height: 18px;
         color: rgb(180, 180, 180) !important;
     }
-    &__label__checkbox {
-        padding-left: 5px;
-        cursor: pointer;
+    &__label {
+        &__checkbox {
+            padding-left: 5px;
+            cursor: pointer;
+        }
     }
 }

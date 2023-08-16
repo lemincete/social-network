@@ -1,26 +1,24 @@
-import { FC } from 'react';
 import styles from './index.module.scss';
 
 import { ISettingsForm } from '../../types';
 
 import { useAppSelector } from '../../../../hooks/useAppSelector';
-
 import { useFormContext } from 'react-hook-form';
+import { useSettingsContext } from '../../context/SettingsContext';
 
 import SettingsValidationErrorMessage from '../SettingsValidationErrorMessage';
 
 const genders: string[] = ['Male', 'Female', 'Other'];
 
-interface SettingsGenderBodyProps {
-    gender: string,
-    setGender: (gender: string) => void,
-}
 
-const SettingsGenderBody: FC<SettingsGenderBodyProps> = ({ gender, setGender }) => {
+
+const SettingsGenderBody = () => {
 
     const { user } = useAppSelector(state => state.user);
 
     const { reset, register, formState: { errors } } = useFormContext<ISettingsForm>();
+
+    const { gender, setGender } = useSettingsContext();
 
     const changeGender = (gender: string) => {
         reset({ otherGender: '' });

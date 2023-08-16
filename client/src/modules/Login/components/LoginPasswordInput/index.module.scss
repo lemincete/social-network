@@ -11,13 +11,13 @@
         }
     }
 
-    &__eye__body {
-        cursor: pointer;
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        right: 5px;
-        img {
+    &__eye {
+        &__body {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 5px;
         }
     }
 }

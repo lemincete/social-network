@@ -1,14 +1,12 @@
 import styles from './index.module.scss';
 
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 
 import { useFormContext, SubmitHandler } from 'react-hook-form';
 
 import { ILoginForm } from '../../types';
 
-import { fetchLogin } from '../../api/fetchLogin';
-
-import { useFetching } from '../../../../hooks/useFetching';
+import { useLoginUser } from '../../hooks/useLoginUser';
 
 import Logo from './images/logo.svg';
 
@@ -22,15 +20,7 @@ const LoginBody = () => {
 
     const [responseMessage, setResponseMessage] = useState<string>('');
 
-    const [loginUser, isLoginLoading] = useFetching(async (profile: ILoginForm) => {
-        const { isError, message } = await fetchLogin(profile);
-        isError ? setResponseMessage(message) : successfulLogin(message)
-    });
-
-    const successfulLogin = useCallback((jwt: string) => {
-        localStorage.setItem('jwt', jwt);
-        window.location.replace('/');
-    }, [])
+    const [loginUser, isLoginLoading] = useLoginUser(setResponseMessage);
 
     const { handleSubmit } = useFormContext<ILoginForm>();
 

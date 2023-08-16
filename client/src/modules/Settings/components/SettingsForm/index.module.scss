@@ -1,25 +1,8 @@
 .root {
     &__form {
         border: 2px solid rgb(230, 230, 230);
-        flex: 0 1 80%;
+        flex: 0 1 75%;
         padding: 15px 0;
         border-radius: 5px;
-    }
-    &__form__item__block {
-        display: flex;
-        margin-bottom: 15px;
-        position: relative;
-        padding: 0 15px;
-        padding-bottom: 15px;
-        column-gap: 20px;
-        &::after {
-            content: "";
-            bottom: 0;
-            left: 0;
-            background: rgb(230, 230, 230);
-            height: 2px;
-            width: 100%;
-            position: absolute;
-        }
     }
 }

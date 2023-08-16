@@ -1,14 +1,18 @@
 .root {
-    &__input__title {
-        margin-bottom: 10px;
+    &__input {
+        &__title {
+            margin-bottom: 10px;
+        }
     }
-    &__form__input {
-        width: 100%;
-        border: 2px solid rgb(230, 230, 230);
-        border-radius: 5px;
-        padding: 10px;
-        &:focus {
-            border: 2px solid #459ef7;
+    &__form {
+        &__input {
+            width: 100%;
+            border: 2px solid rgb(230, 230, 230);
+            border-radius: 5px;
+            padding: 10px;
+            &:focus {
+                border: 2px solid #459ef7;
+            }
         }
     }
 }

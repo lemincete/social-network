@@ -2,8 +2,6 @@ import { FC } from 'react';
 
 import { useFormContext } from 'react-hook-form';
 
-import { getCapitalizeString } from '../../helpers/getCapitalizeString';
-
 import { IRegistrationForm, IFieldsName } from '../../types';
 import { RegisterOptions } from "react-hook-form"
 
@@ -12,6 +10,8 @@ import styles from './index.module.scss';
 import RegistrationPasswordInput from '../RegistrationPasswordInput';
 import RegistrationValidationErrorMessage from '../RegistrationValidationErrorMessage';
 import RegistrationValidationBody from '../RegistrationValidationBody';
+
+import { capitalizeString } from '../../helpers/capitalizeString';
 
 
 interface RegistrationFormItemProps {
@@ -28,7 +28,7 @@ const RegistrationFormItem: FC<RegistrationFormItemProps> = ({ name, isPassword,
 
     return (
         <div className={styles.root}>
-            <h3 className={styles.root__input__title}>{name === 'confirmPassword' ? 'Confirm Password' : getCapitalizeString(name)}</h3>
+            <h3 className={styles.root__input__title}>{name === 'confirmPassword' ? 'Confirm Password' : capitalizeString(name)}</h3>
             {isPassword
                 ? <RegistrationPasswordInput nameField={name} />
                 : <input required {...register(name, options)} className={styles.root__form__input} type="text" />

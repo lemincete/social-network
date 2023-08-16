@@ -1,13 +1,11 @@
-import { FC } from 'react';
-
 import { Alert, Snackbar } from "@mui/material";
 
-interface SettingsAlertMessageProps {
-    message: string,
-    setMessage: (message: string) => void
-}
+import { useSettingsContext } from "../../context/SettingsContext";
 
-const SettingsAlertMessage: FC<SettingsAlertMessageProps> = ({ message, setMessage }) => {
+const SettingsAlertMessage = () => {
+
+    const { message, setMessage } = useSettingsContext();
+
     return (
         <div>
             <Snackbar open={message.length > 0} >
