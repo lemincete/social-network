@@ -18,6 +18,7 @@ const SettingsForm = () => {
     const { gender } = useSettingsContext();
 
     const { imageBody } = useAppSelector(state => state.avatar);
+    const { user } = useAppSelector(state => state.user);
 
     const { handleSubmit } = useFormContext<ISettingsForm>();
 
@@ -28,7 +29,7 @@ const SettingsForm = () => {
 
     const onSubmit: SubmitHandler<ISettingsForm> = data => {
         const { confirmPassword, otherGender, ...profile } = data
-        fetchUpdateUser({ ...profile, image: imageBody.image, gender: gender === 'Other' ? otherGender : gender });
+        fetchUpdateUser({ ...profile, image: imageBody.image, gender: gender === 'Other' ? otherGender : gender, email: profile.email || user?.email });
     }
 
     return (

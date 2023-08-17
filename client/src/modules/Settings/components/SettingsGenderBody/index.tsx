@@ -36,7 +36,7 @@ const SettingsGenderBody = () => {
                 )}
             </div>
             {gender === 'Other' &&
-                <div className={styles.root__form__other__gender}>
+                <div className={styles.root__form__gender__other}>
                     <input defaultValue={user?.gender} placeholder='Gender' required {...register('otherGender', { pattern: /^[^\s\d]*$/ })} className={styles.root__form__input} type="text" />
                     {errors.otherGender?.type === 'pattern' && <SettingsValidationErrorMessage>Gender can't be has numbers/symbols</SettingsValidationErrorMessage>}
                 </div>

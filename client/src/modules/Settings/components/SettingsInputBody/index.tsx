@@ -11,9 +11,11 @@ import { useAppSelector } from '../../../../hooks/useAppSelector';
 
 import { ISettingsForm, IInputListItem } from '../../types';
 
+interface SettingsInputBodyProps extends IInputListItem {
+    required: boolean
+}
 
-
-const SettingsInputBody: FC<IInputListItem> = ({ name, options }) => {
+const SettingsInputBody: FC<SettingsInputBodyProps> = ({ name, options, required }) => {
 
     const { register, formState: { errors } } = useFormContext<ISettingsForm>();
 
@@ -26,7 +28,7 @@ const SettingsInputBody: FC<IInputListItem> = ({ name, options }) => {
     return (
         <div className={styles.root}>
             <h3 className={styles.root__title}>{capitalizeString(name)}</h3>
-            <input required defaultValue={name !== 'password' && name !== 'confirmPassword' ? user[name] : ''} {...register(name, options)} className={styles.root__input} type="text" />
+            <input required={required} defaultValue={name !== 'password' && name !== 'confirmPassword' ? user[name] : ''} {...register(name, options)} className={styles.root__input} type="text" />
             <SettingsValidationBody type={errors[name]?.type} name={name} />
         </div>
     );

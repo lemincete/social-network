@@ -15,7 +15,7 @@ export type ISettingsForm = Omit<ISettingsProfile, 'gender'> & {
     confirmPassword: string
 }
 
-export type IFieldsName = 'name' | 'surname' | 'email' | 'gender' | 'password' | 'confirmPassword';
+export type IFieldsName = 'name' | 'surname' | 'email' | 'gender' | 'password' | 'confirmPassword' | 'bio';
 
 export interface IInputListItem {
     name: IFieldsName;

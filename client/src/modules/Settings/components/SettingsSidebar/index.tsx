@@ -3,6 +3,7 @@ import { FC } from 'react';
 import styles from './index.module.scss';
 
 import SettingsSidebarItem from '../SettingsSidebarItem';
+import SettingsLogout from '../SettingsLogout';
 
 import { SettingsOptionItem } from '../../types';
 
@@ -22,6 +23,7 @@ const SettingsSidebar: FC<SettingsSidebarProps> = ({ list, activeOption, setActi
                     <SettingsSidebarItem key={item.name} name={item.name} image={item.image} activeOption={activeOption} setActiveOption={setActiveOption} />
                 )}
             </div>
+            <SettingsLogout />
         </div>
     );
 }

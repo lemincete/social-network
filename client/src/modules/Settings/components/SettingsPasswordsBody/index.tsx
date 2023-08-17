@@ -10,7 +10,7 @@ import { usePasswordsMatched } from "../../hooks/usePasswordsMatched";
 
 const SettingsPasswordsBody = () => {
 
-    const { watch, setValue } = useFormContext<ISettingsForm>();
+    const { watch } = useFormContext<ISettingsForm>();
 
     const passwordsFields = watch(['password', 'confirmPassword']);
 

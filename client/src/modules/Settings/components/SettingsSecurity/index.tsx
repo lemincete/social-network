@@ -8,7 +8,7 @@ const SettingsSecurity = () => {
     return (
         <div className={styles.root}>
             <SettingsFormItem>
-                <SettingsInputBody name="email" options={{ pattern: /^\w+@[a-z]+\.[a-z]+$/ }} />
+                <SettingsInputBody required={true} name="email" options={{ pattern: /^\w+@[a-z]+\.[a-z]+$/ }} />
             </SettingsFormItem>
             <SettingsPasswordsBody />
         </div>

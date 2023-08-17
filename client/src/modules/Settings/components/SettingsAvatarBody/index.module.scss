@@ -1,58 +1,62 @@
+$img-size: 80px;
+
 .root {
-    flex: 0 1 20%;
-    display: flex;
-    flex-direction: column;
-    border: 2px solid rgb(230, 230, 230);
-    padding: 15px;
-    border-radius: 5px;
-    &__avatar__body {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        flex: 1 1 100%;
-    }
-    &__avatar__buttons {
-        padding-left: 10px;
-        margin-top: 10px;
-        row-gap: 3px;
-        display: flex;
-        align-self: start;
-        flex-direction: column;
-        row-gap: 10px;
-    }
-    &__avatar img {
-        width: 100px;
-        height: 100px;
-        border-radius: 50%;
-    }
-    &__photo__btn {
-        padding-left: 10px;
-        background: none;
-        display: flex;
-        align-items: center;
-        column-gap: 5px;
+    background-color: rgb(245, 245, 245);
+    padding: 15px 0;
+    margin-bottom: 10px;
+    border-bottom: 2px solid rgb(230, 230, 230);
+    &__avatar {
         position: relative;
         cursor: pointer;
-        span {
-            flex: 0 1 80%;
-            font-size: 15px;
+        &__body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1 1 100%;
         }
-        img {
-            flex: 0 1 20%;
-            width: 20px;
-            height: 20px;
+        &__input {
+            &__file {
+                display: none;
+            }
         }
-        &::before {
+        & > img {
+            width: $img-size;
+            height: $img-size;
+            border-radius: 50%;
+        }
+        &__menu {
+            border-radius: 5px;
+            z-index: 3;
+            top: $img-size + 5;
+            background: rgb(260, 260, 260);
+            left: -12px;
             position: absolute;
-            content: "";
-            width: 5px;
-            height: 100%;
-            top: 0;
-            left: 0;
-            background: rgb(220, 220, 220);
+            display: flex;
+            flex-direction: column;
+            row-gap: 10px;
+            border: 2px solid rgb(230, 230, 230);
+            box-shadow: 0 20px 40px 0 rgb(180, 180, 180);
+            padding: 10px;
         }
     }
-    &__avatar__input__file {
-        display: none;
+    &__photo {
+        &__btn {
+            background: none;
+            display: flex;
+            align-items: center;
+            column-gap: 10px;
+            position: relative;
+            cursor: pointer;
+            span {
+                flex: 0 1 80%;
+                display: block;
+                font-size: 15px;
+            }
+            img {
+                flex: 0 1 20%;
+                width: 20px;
+                height: 20px;
+            }
+        }
     }
 }

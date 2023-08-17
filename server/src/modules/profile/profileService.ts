@@ -39,9 +39,9 @@ class ProfileService {
 
     }
 
-    async updateProfile(user: string, name: string, surname: string, email: string, gender: string, password: string, image: string | null): Promise<UserDto> {
+    async updateProfile(user: string, name: string, surname: string, email: string, gender: string, password: string, image: string | null, bio: string): Promise<UserDto> {
 
-        if (password.length > 0) {
+        if (password && password.length > 0) {
             if (password.length < 8) {
                 throw ApiError.badRequest(400, `Password is too short`)
             } else if (password.length > 16) {
@@ -55,7 +55,7 @@ class ProfileService {
             throw ApiError.badRequest(400, 'User not found');
         }
 
-        if (password.length > 0) {
+        if (password && password.length > 0) {
             const hashPassword = await bcrypt.hash(password, 7);
             candidate.password = hashPassword
         }
@@ -64,6 +64,7 @@ class ProfileService {
             name: stringToCapitalize(name),
             surname: stringToCapitalize(surname),
             gender: stringToCapitalize(gender),
+            bio,
             email
         }
 

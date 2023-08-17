@@ -41,9 +41,9 @@ class ProfileController {
 
             const { userId } = req;
 
-            const { name, surname, email, gender, password, image } = req.body as { name: string, surname: string, email: string, gender: string, password: string, image: string | null }
+            const { name, surname, email, gender, password, image, bio } = req.body as { name: string, surname: string, email: string, gender: string, password: string, image: string | null, bio: string }
 
-            const user = await ProfileService.updateProfile(userId, name, surname, email, gender, password, image);
+            const user = await ProfileService.updateProfile(userId, name, surname, email, gender, password, image, bio);
 
             return res.json({ user });
 

@@ -16,7 +16,8 @@ interface IUpdateProfile {
     gender: string,
     email: string,
     password: string,
-    image: string
+    image: string,
+    bio: string
 }
 
 

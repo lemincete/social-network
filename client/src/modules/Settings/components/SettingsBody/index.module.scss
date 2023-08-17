@@ -9,9 +9,9 @@
     &__container {
         max-width: 800px;
         margin: 0 auto;
-    }
-    &__container__body {
-        display: flex;
-        column-gap: 20px;
+        &__body {
+            display: flex;
+            column-gap: 20px;
+        }
     }
 }
